@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- css -->
+<!-- <link rel="stylesheet" href="media/css/style.css">
+ -->
+<meta charset="UTF-8">
+<title> - 777game -</title>
+
+<style>
+
+</style>
+</head>
+
+<body>
+<div class="fullNumbers"></div>
+<div class="arrayHolder"></div>
+<button id="randomNunBtn">click here</button>
+
+<!-- scripts -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+<!-- <script src="media/js/scripts.js"></script> -->
+<script>
+// random number
+function randomSeventeenNumFun(){	
+	// run 7 times
+	for( var x = 0; allNumberArray.length <= 16; x++ ){	
+        var randomNum = Math.floor(Math.random() * 70) + 1;
+        if( allNumberArray.includes(randomNum) == false ){
+            allNumberArray.push( randomNum );
+        }else{ /* console.log("block " + randomNum + " from array"); */}
+
+    }
+}
+
+// random 7 numbers 
+function randomNumFun(){
+	// run 7 times
+	for( var x = 0; numberArray.length <= 6; x++ ){	
+        var randomNum = Math.floor(Math.random() * 70) + 1;
+        if( numberArray.includes(randomNum) == false ){
+            numberArray.push( randomNum );
+        }else{ console.log("tzzzzz!! number " + randomNum + " already exists"); }
+    }
+}
+
+// comparing between array's
+function comparingArrays(){
+	var a = allNumberArray,
+		b = numberArray,
+		counter = 0;
+
+    for( i=0; i < a.length; i++ ){      // 17
+    	console.log("--> I array num [" + i + "]: " + a[i]);
+        for( j=0; j < b.length; j++ ){ //   7
+        	console.log("J array num [" + j + "]: " + b[j]);
+            if( b[j] == a[i] ){
+            	console.log("-------------> "+ b[j] + "---" + a[i] + " <-------------");
+                counter++;
+            }
+        }
+    }
+	return counter;
+}
+
+// win table
+function winTable(){
+    switch ( comparingArrays() ) {
+        case 0: return day = "You didn't even guessed one! shame"; break;
+        case 1: return day = "You only guessed 1 number and you won nothing";  break;
+        case 2: return day = "You only guessed 2 number and you won nothing"; break;
+        case 3: return day = "You guessed 3 numbers and won 5 shekels"; break;
+        case 4: return day = "You guessed 4 numbers and won 20 shekels"; break;
+        case 5: return day = alert("You guessed 5 numbers and won 40 shekels"); break;
+        case 6: return day = alert("You guessed 6 numbers and won 500 shekels"); break;
+        case 7: return day = alert("WOW!! You guessed 7 numbers and won 70,000 shekels");
+    }
+}
+
+// variable declaration
+var randomNunberBtn = document.getElementById("randomNunBtn"),
+	fullArrayHolder = document.getElementsByClassName("fullNumbers")[0],
+	arrayHolder = document.getElementsByClassName("arrayHolder")[0],
+	outputFullNum,
+	outputNum,
+	allNumberArray = [],
+	numberArray = [];
+
+/*randomSeventeenNumFun()
+randomNumFun();
+comparingArrays();
+winTable();*/
+
+//print 17 randoms numbera
+randomSeventeenNumFun();
+fullArrayHolder.innerHTML = allNumberArray.join(" | ");
+
+// click event button
+randomNunberBtn.addEventListener("click", function(){
+	//clean array's
+	allNumberArray = [];
+	randomSeventeenNumFun();
+	numberArray = [];
+	randomNumFun();
+	//--------------
+
+	// print array's inside html
+	// 17 nubers
+	outputFullNum = allNumberArray.sort(function(a, b){return a-b});
+    fullArrayHolder.innerHTML = outputFullNum.join(" | ") ;
+    // 7 numbera
+	outputNum = numberArray.sort(function(a, b){return a-b});
+    arrayHolder.innerHTML = outputNum.join(" | ") ;
+    //--------------------------
+
+    comparingArrays();
+	winTable();
+	console.log( comparingArrays() );
+	console.log( winTable() );					
+	//console.log( outputNum.join(" | ") );
+});
+
+
+
+/* //-- jquery --
+
+$( document ).ready(function() {
+    $("#randomNunBtn").on("click", function(){
+		numberArray = [];
+		randomNumFun();
+		outputNum = numberArray.sort(function(a, b){return a-b});
+		$(".arrayHolder").html( outputNum.join(" | ") );
+		console.log( outputNum );
+	})
+});
+*/
+
+
+</script>
+
+
+<!-- /scripts -->
+</body>
+
+</html>
